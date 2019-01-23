@@ -1,13 +1,11 @@
 <template>
-  <v-container>
     <div class="flex">
       <div class="vid elevation-5"
         v-for="video in videos"
-        :key="video">
+        :key="video.title">
         <h1>{{video.title}}</h1>
       </div>
     </div>
-  </v-container>
 </template>
 
 <script>
@@ -19,15 +17,15 @@
           {title: "test block 1"},
           {title: "test block 2"},
           {title: "test block 3"},
-          {title: "test block 3"},
-          {title: "test block 3"},
-          {title: "test block 3"},
-          {title: "test block 3"},
-          {title: "test block 3"},
-          {title: "test block 3"},
-          {title: "test block 3"},
           {title: "test block 4"},
-          {title: "test block 5"}
+          {title: "test block 5"},
+          {title: "test block 6"},
+          {title: "test block 7"},
+          {title: "test block 8"},
+          {title: "test block 9"},
+          {title: "test block 10"},
+          {title: "test block 11"},
+          {title: "test block 12"}
         ]
       }
     }

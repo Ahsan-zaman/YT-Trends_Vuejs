@@ -33,18 +33,7 @@
       <v-toolbar-title class="mr-5 align-center">
         <span class="title">YT Trend</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-layout row align-center style="max-width: 650px">
-        <v-text-field
-          class="mb-1"
-          :append-icon-cb="() => {}"
-          placeholder="Search..."
-          single-line
-          append-icon="search"
-          color="white"
-          hide-details
-        ></v-text-field>
-      </v-layout>
+      
     </v-toolbar>
     <v-content>
       <router-view/>
