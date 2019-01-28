@@ -7,7 +7,8 @@
 </template>
 
 <script>
-//   import axios from 'axios'
+    import axios from 'axios'
+    import {mapActions,mapState} from 'vuex'
     import EachVid from './EachVid.vue'
   export default {
     components: {
@@ -15,7 +16,7 @@
     },
     data() {
       return{
-        videos: [
+        videos1: [
         {
             "kind": "youtube#video",
             "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/oShdryFUuXc8r5z8XmO5VgO0pSY\"",
@@ -633,30 +634,64 @@
             }
         }
         ],
-        videos1:[]
+        videos:[]
       }
     },
+    methods:{
+        ...mapActions(['assignE','removeE']),
+        async update(){
+            await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
+            params:{
+            part: 'snippet, contentDetails, statistics',
+            chart: 'mostPopular',
+            videoCategoryId: this.videoCategoryId,
+            maxResults: this.maxResults,
+            regionCode: this.regionCode,
+            key: 'AIzaSyB_wn0eW1-iohO_pwRPl9gNUFqZ8-jz9_Q'
+            }
+            })
+            .then((res) =>{
+                this.videos = res.data.items
+                this.removeE()
+            })
+            .catch(err=>{
+                this.assignE(err.message)
+            })
+        }
+    },
     computed:{
-        
+        ...mapState(['error','maxResults','regionCode','videoCategoryId'])
+    },
+    watch:{
+        'maxResults': function(){
+            this.update()
+        },
+        'regionCode': function(){
+            this.update()
+        },
+        'videoCategoryId': function(){
+            this.update()
+        }
+    },
+    async mounted(){
+        await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
+            params:{
+            part: 'snippet, contentDetails, statistics',
+            chart: 'mostPopular',
+            videoCategoryId: '10',
+            maxResults: '20',
+            regionCode: 'US',
+            key: 'AIzaSyB_wn0eW1-iohO_pwRPl9gNUFqZ8-jz9_Q'
+        }
+        })
+        .then((res) =>{
+            this.videos = res.data.items
+            this.removeE()
+        })
+        .catch(err=>{
+            this.assignE(err.message)
+        })
     }
-    // async mounted(){
-    //     await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
-    //         params:{
-    //         part: 'snippet, contentDetails, statistics',
-    //         chart: 'mostPopular',
-    //         videoCategoryId: '10',
-    //         maxResults: '20',
-    //         regionCode: 'US',
-    //         key: 'AIzaSyB_wn0eW1-iohO_pwRPl9gNUFqZ8-jz9_Q'
-    //     }
-    //     })
-    //     .then((res) =>{
-    //         this.videos1 = res.data.items
-    //     })
-    //     .catch(err=>{
-    //         this.assignE(err)
-    //     })
-    // }
   }
 </script>
 

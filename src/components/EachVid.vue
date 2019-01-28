@@ -8,7 +8,6 @@
         </v-btn>
       </div>
     </v-img>
-    <input id="input" type="text" :value="value">
   </v-card>
 </template>
 
@@ -26,9 +25,9 @@ export default {
       if(navigator.share){
         try {
             await navigator.share({ title: this.title, url: this.value });
-            console.log("Data was shared successfully");
         } 
         catch (err) {
+            // eslint-disable-next-line
             console.error("Share failed:", err.message);
         }
       }else{
