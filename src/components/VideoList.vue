@@ -1,18 +1,14 @@
 <template>
     <div class="flex">
-      <div class="vid elevation-5"
-        v-for="video in videos"
-        :key="video.id">
-        <each-vid
-        v-bind:video="video" 
-        />
-      </div>
+        <div v-for="video in videos" :key="video.id">
+            <each-vid :vid="video" class="vid elevation-5"/>
+        </div>
     </div>
 </template>
 
 <script>
-  // import axios from 'axios'
-  import EachVid from './EachVid.vue'
+//   import axios from 'axios'
+    import EachVid from './EachVid.vue'
   export default {
     components: {
       EachVid
@@ -635,25 +631,31 @@
                 "favoriteCount": "0",
                 "commentCount": "10140"
             }
-        },{},{},{},{},{},{},{},{},{},{}
-      ]
+        }
+        ],
+        videos1:[]
       }
     },
+    computed:{
+        
+    }
     // async mounted(){
-    //   await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
-    //     params:{
-    //       part: 'snippet, contentDetails, statistics',
-    //       chart: 'mostPopular',
-    //       maxResults: 25,
-    //       regionCode: 'US',
-    //       key: 'AIzaSyB_wn0eW1-iohO_pwRPl9gNUFqZ8-jz9_Q'
+    //     await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
+    //         params:{
+    //         part: 'snippet, contentDetails, statistics',
+    //         chart: 'mostPopular',
+    //         videoCategoryId: '10',
+    //         maxResults: '20',
+    //         regionCode: 'US',
+    //         key: 'AIzaSyB_wn0eW1-iohO_pwRPl9gNUFqZ8-jz9_Q'
     //     }
-    //   })
-    //   .then((res) =>{
-    //     this.videos = res.data.items
-    //     console.log(this.videos)
-    //   })
-    //   .catch(err=>{console.log(err)})
+    //     })
+    //     .then((res) =>{
+    //         this.videos1 = res.data.items
+    //     })
+    //     .catch(err=>{
+    //         this.assignE(err)
+    //     })
     // }
   }
 </script>
@@ -669,8 +671,6 @@
 }
 
 .vid {
-  height: 180px;
-  width: 320px;
   margin: 25px;
 }
 </style>
