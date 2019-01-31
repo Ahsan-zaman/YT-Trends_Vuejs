@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card @click="video">
     <v-img :src="vid.snippet.thumbnails.standard.url" class="vid">
       <div class="title">
         <p v-text="vid.snippet.title.slice(0,30)+`...`"></p>
@@ -17,7 +17,8 @@ export default {
   data: function() {
     return {
       value: "https://www.youtube.com/watch?v=" + this.vid.id,
-      title: this.vid.snippet.title
+      title: this.vid.snippet.title,
+      id: this.vid.id
     };
   },
   methods: {
@@ -34,6 +35,9 @@ export default {
           alert('your browser is not supported')
       }
       
+    },
+    video(){
+      this.$router.push(`/video/${this.id}/${this.title}`)
     }
   }
 };

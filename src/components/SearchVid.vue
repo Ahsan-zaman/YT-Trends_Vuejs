@@ -27,7 +27,9 @@
           color="#F44336"
           thumb-color="#F44336"
           thumb-label="always"
-          step="10">
+          step="5"
+          min="0" 
+          max="50">
         </v-slider>
       </form>
     </v-container>

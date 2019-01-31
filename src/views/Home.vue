@@ -13,8 +13,6 @@
     components: {
       SearchVid,
       VideoList
-    },
-    methods:{
     }
   }
 </script>

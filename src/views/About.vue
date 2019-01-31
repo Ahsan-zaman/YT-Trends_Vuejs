@@ -21,6 +21,7 @@
           This is a Vuejs based front-end application to show the latest trending videos <br>
            from YouTube according to selected region and category.
            <br>
+        </p>
           <v-card>
 
         <v-list subheader>
@@ -45,7 +46,6 @@
           </v-list-tile>
         </v-list>
       </v-card>
-        </p>
       </v-flex>
 
     </v-layout>
@@ -72,4 +72,7 @@ export default {
   }
 }
 </script>
+<style scoped>
+</style>
+
 
