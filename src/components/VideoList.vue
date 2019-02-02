@@ -33,11 +33,18 @@
             }
             })
             .then((res) =>{
-                this.videos = res.data.items
-                this.removeE()
+                if(res.data.pageInfo.totalResults > 0){
+                    this.videos = res.data.items
+                    this.removeE()
+                }
+                else{
+                    this.assignE('No Results were found in this Region & Category')
+                    this.videos =[]
+                }
             })
             .catch(err=>{
-                this.assignE(err.message)
+                this.assignE('could not find any video try another category')
+                this.videos =[]
             })
         }
     },
@@ -67,11 +74,18 @@
         }
         })
         .then((res) =>{
-            this.videos = res.data.items
-            this.removeE()
+            if(res.data.pageInfo.totalResults > 0){
+                this.videos = res.data.items
+                this.removeE()
+            }
+            else{
+                this.assignE('No Results were found in this Region & Category')
+                this.videos =[]
+            }
         })
         .catch(err=>{
-            this.assignE(err.message)
+            this.assignE('could not find any video try another category')
+            this.videos =[]
         })
     }
   }

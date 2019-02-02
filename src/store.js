@@ -8,7 +8,8 @@ export default new Vuex.Store({
     maxResults: 20,
     regionCode: 'US',
     videoCategoryId: '10',
-    error: ''
+    error: '',
+    error2:''
   },
   mutations: {
     assignMR(state,val){
@@ -25,6 +26,12 @@ export default new Vuex.Store({
     },
     removeE(state){
       state.error = '' ;
+    },
+    assignE2(state,val){
+      state.error2 = val ;
+    },
+    removeE2(state){
+      state.error2 = '' ;
     }
   },
   actions: {
@@ -44,6 +51,12 @@ export default new Vuex.Store({
     },
     removeE(context){
       context.commit('removeE')
+    },
+    assignE2(context,val){
+      context.commit('assignE2',val)
+    },
+    removeE2(context){
+      context.commit('removeE2')
     }
  
   }

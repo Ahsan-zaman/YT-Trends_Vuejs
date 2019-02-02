@@ -17,6 +17,7 @@
           label="Catagory"
           color="#F44336"
           spellcheck="false"
+          :disabled='combo'
           required
           :items="Cat">
         </v-combobox>
@@ -34,18 +35,20 @@
       </form>
     </v-container>
     <v-alert
-      :value="error"
+      :value="error || error2"
       color="error"
       icon="warning"
       outline
     >
       {{error}}
+      {{error2}}
     </v-alert>
   </v-form>
 </template>
 
 <script>
   import {mapActions,mapState} from 'vuex'
+  import axios from 'axios'
   export default {
     data(){
       return{
@@ -86,6 +89,7 @@
           'Shows (43)',
           'Trailers (44)'
         ],
+        combo: false,
         countries: [
           'Afghanistan - AF',
           'Albania - AL',
@@ -206,17 +210,45 @@
           'Zimbabwe - ZW'
         ]
       }
-    },methods:{
-      ...mapActions(['assignRC','assignVC','assignMR','assignE','removeE']),
+    },
+    methods:{
+      ...mapActions(['assignRC','assignVC','assignMR','assignE','removeE','assignE2','removeE2']),
+      async UpdateCat(){
+        await axios.get(`https://www.googleapis.com/youtube/v3/videoCategories`, {
+        params:{
+        part: 'id, snippet',
+        chart: 'mostPopular',
+        regionCode: this.regionCode,
+        key: 'AIzaSyB_wn0eW1-iohO_pwRPl9gNUFqZ8-jz9_Q'
+        }
+        })
+        .then((res) =>{
+
+          if(res.data.items.length > 0){
+            this.Cat2 = res.data.items
+            this.removeE2()
+            this.combo = false
+          }
+          else if(res.data.items.length <= 0){
+            console.log(res.data.items.length)
+            this.assignE2('No Categories to select from in this Region')
+            this.combo = true
+          }
+        })
+        .catch(err=>{
+            this.assignE(err.message)
+        })
+      }
     },
     computed: {
-    ...mapState(['error'])
+    ...mapState(['error','error2','regionCode'])
     },
     watch:{
       Region: function(val){
         var myRe = /(?<=- ).*/;
         var value = myRe.exec(val); 
         this.assignRC(value[0])
+        this.UpdateCat()
       },
       Catagory: function(val){
         var myRe = /\d+/;
