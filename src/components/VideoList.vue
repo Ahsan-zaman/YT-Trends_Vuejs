@@ -55,13 +55,13 @@
                 this.videos =[]
             })
         },
-        async share() {
-            try {
-                await navigator.share({ title: this.title, url: this.value });
-            } 
-            catch (err) {
-                alert("Share failed:", err.message);
-            }
+        share() {
+            navigator.share({ 
+                title: this.title, 
+                url: this.value 
+            })
+            .then(()=> console.log('share successful'))
+            .catch((err)=> console.log(err));
         }
     },
     computed:{
