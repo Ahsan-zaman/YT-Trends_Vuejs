@@ -13,7 +13,6 @@ export default {
   props: ["vid"],
   data: function() {
     return {
-      value: "https://www.youtube.com/watch?v=" + this.vid.id,
       title: this.vid.snippet.title,
       id: this.vid.id
     };

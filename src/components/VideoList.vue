@@ -2,13 +2,7 @@
     <div class="flex">
         <div v-for="video in videos" :key="video.id" class="pos">
             <each-vid :vid="video" class="vid elevation-5"/>
-            <v-btn icon
-            v-if="showBTN"
-            class="btn"
-            color="#F44336" 
-            @click="share">
-                <v-icon>share</v-icon>
-            </v-btn>
+            <share v-if="showBTN" class="btn" :vid="video"/>
         </div>
     </div>
 </template>
@@ -17,14 +11,16 @@
     import axios from 'axios'
     import {mapActions,mapState} from 'vuex'
     import EachVid from './EachVid.vue'
+    import Share from './Share.vue'
   export default {
     components: {
-      EachVid
+      EachVid,
+      Share
     },
     data() {
       return{
         videos:[],
-        showBTN : false
+        showBTN : true
       }
     },
     methods:{
@@ -50,23 +46,10 @@
                     this.videos =[]
                 }
             })
-            .catch(err=>{
+            .catch(()=>{
                 this.assignE('could not find any video try another category')
                 this.videos =[]
             })
-        },
-        async share() {
-            if(navigator.share){
-                try {
-                    await navigator.share({ title: this.title, url: this.value });
-                } 
-                catch (err) {
-                    // eslint-disable-next-line
-                    console.error("Share failed:", err.message);
-                }
-            }else{
-                alert('your browser is not supported')
-            }
         }
     },
     computed:{
@@ -104,7 +87,7 @@
                 this.videos =[]
             }
         })
-        .catch(err=>{
+        .catch(()=>{
             this.assignE('could not find any video try another category/region')
             this.videos =[]
         })
