@@ -245,15 +245,13 @@
     },
     watch:{
       Region: function(val){
-        var myRe = /(?<=- ).*/;
-        var value = myRe.exec(val); 
-        this.assignRC(value[0])
+        var value = /[^- ][A-Z]/.exec(val)[0]; 
+        this.assignRC(value)
         this.UpdateCat()
       },
       Catagory: function(val){
-        var myRe = /\d+/;
-        var value = myRe.exec(val); 
-        this.assignVC(value[0])
+        var value = /\d+/.exec(val)[0]; 
+        this.assignVC(value)
       },
       slider: function(val){
         if(val>0){
