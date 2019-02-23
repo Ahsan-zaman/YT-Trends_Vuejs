@@ -55,13 +55,18 @@
                 this.videos =[]
             })
         },
-        share() {
-            navigator.share({ 
-                title: this.title, 
-                url: this.value 
-            })
-            .then(()=> console.log('share successful'))
-            .catch((err)=> console.log(err));
+        async share() {
+            if(navigator.share){
+                try {
+                    await navigator.share({ title: this.title, url: this.value });
+                } 
+                catch (err) {
+                    // eslint-disable-next-line
+                    console.error("Share failed:", err.message);
+                }
+            }else{
+                alert('your browser is not supported')
+            }
         }
     },
     computed:{
