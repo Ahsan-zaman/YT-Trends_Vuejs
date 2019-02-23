@@ -56,10 +56,11 @@
             })
         },
         async share() {
-            if(navigator.share){
+            try {
                 await navigator.share({ title: this.title, url: this.value });
-            }else{
-                alert('something went wrong !')
+            } 
+            catch (err) {
+                alert("Share failed:", err.message);
             }
         }
     },
