@@ -38,7 +38,6 @@ export default {
   color: #fff;
   line-height: unset;
   padding: 2px;
-  /* border-bottom: #F44336 1px solid; */
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
@@ -55,5 +54,17 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
+}
+@media only screen and (max-width: 768px){
+  .vid{
+    width: 354px;
+    height: 200px;
+  }
+}
+@media only screen and (max-width: 400px){
+  .vid{
+    width:318.6px ;
+    height:180px ;
+  }
 }
 </style>
