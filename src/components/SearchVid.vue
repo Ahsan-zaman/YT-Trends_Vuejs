@@ -225,13 +225,12 @@
         .then((res) =>{
 
           if(res.data.items.length > 0){
-            this.Cat2 = res.data.items
+            console.log(res.data.items)
             this.removeE2()
             this.combo = false
           }
           else if(res.data.items.length <= 0){
-            console.log(res.data.items.length)
-            this.assignE2('No Categories to select from in this Region')
+            this.assignE2('No Categories to select from this Region')
             this.combo = true
           }
         })

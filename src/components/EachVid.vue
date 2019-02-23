@@ -3,9 +3,6 @@
     <v-img :src="vid.snippet.thumbnails.standard.url" class="vid">
       <div class="title">
         <p v-text="vid.snippet.title.slice(0,30)+`...`"></p>
-        <v-btn icon color="#F44336" @click="share">
-          <v-icon>share</v-icon>
-        </v-btn>
       </div>
     </v-img>
   </v-card>
@@ -22,20 +19,6 @@ export default {
     };
   },
   methods: {
-    async share() {
-      if(navigator.share){
-        try {
-            await navigator.share({ title: this.title, url: this.value });
-        } 
-        catch (err) {
-            // eslint-disable-next-line
-            console.error("Share failed:", err.message);
-        }
-      }else{
-          alert('your browser is not supported')
-      }
-      
-    },
     video(){
       this.$router.push(`/video/${this.id}/${this.title}`)
     }

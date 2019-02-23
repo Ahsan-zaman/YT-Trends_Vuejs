@@ -1,7 +1,14 @@
 <template>
     <div class="flex">
-        <div v-for="video in videos" :key="video.id">
+        <div v-for="video in videos" :key="video.id" class="pos">
             <each-vid :vid="video" class="vid elevation-5"/>
+            <v-btn icon
+            v-if="showBTN"
+            class="btn"
+            color="#F44336" 
+            @click="share">
+                <v-icon>share</v-icon>
+            </v-btn>
         </div>
     </div>
 </template>
@@ -16,7 +23,8 @@
     },
     data() {
       return{
-        videos:[]
+        videos:[],
+        showBTN : false
       }
     },
     methods:{
@@ -46,6 +54,13 @@
                 this.assignE('could not find any video try another category')
                 this.videos =[]
             })
+        },
+        async share() {
+            if(navigator.share){
+                await navigator.share({ title: this.title, url: this.value });
+            }else{
+                alert('something went wrong !')
+            }
         }
     },
     computed:{
@@ -84,9 +99,13 @@
             }
         })
         .catch(err=>{
-            this.assignE('could not find any video try another category')
+            this.assignE('could not find any video try another category/region')
             this.videos =[]
         })
+
+        if(navigator.share){
+            this.showBTN = true
+        }
     }
   }
 </script>
@@ -103,5 +122,14 @@
 
 .vid {
   margin: 25px;
+}
+.pos{
+    position: relative;
+}
+.btn{
+    position: absolute;
+    top: 70%;
+    right: 5%;
+
 }
 </style>
